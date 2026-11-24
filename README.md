@@ -1,60 +1,121 @@
-# Thonny Bracket and Quote Auto-pairing Plugin
+# Thonny Auto-pairs
 
-This is an auto-pairing plugin for Thonny 5. Installation varies by operating system.
+An auto-pairing plugin for [Thonny](https://thonny.org/) 5 that adds brackets, quotes, and triple quotes as you type.
+
+[![PyPI](https://img.shields.io/pypi/v/thonny-autopairs.svg)](https://pypi.org/project/thonny-autopairs/)
+[![Python](https://img.shields.io/pypi/pyversions/thonny-autopairs.svg)](https://pypi.org/project/thonny-autopairs/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Features
 
-- Automatically closes brackets `( [ {` and quotes `" '`.
-- Skips over closing characters when typed.
-- Pressing Backspace inside an empty pair deletes both characters.
-- Pressing Enter inside brackets moves the closing bracket to the next line.
-- Entering a bracket or quote around selected text wraps the selection.
-- Typing `"""` three times creates a `"""|"""` pair.
-- Enable or disable it under Tools > Options > Auto-pairs.
+- Auto-closes brackets: `( )`, `[ ]`, and `{ }`
+- Auto-closes single and double quotes
+- Skips over an existing closing bracket or quote
+- Deletes both characters when Backspace is pressed inside an empty pair
+- Moves the closing bracket to a new indented line when Enter is pressed inside a pair
+- Wraps selected text with brackets or quotes
+- Converts `""` or `''` to a triple-quoted pair
+- Works in both the editor and Shell
+- Configurable under **Tools > Options > Auto-pairs**
 
-## Repository Layout
+## Installation
 
-| Folder | Target | Installer |
-| --- | --- | --- |
-| `thonny-autopairs-windows/` | Windows | `thonny-autopairs-setup.exe` from [Releases](https://github.com/Yuvald12321/thonny-autopairs/releases/latest), or `install_helper.py` |
-| `thonny-plugins/` | macOS | `install.command` |
+### From PyPI
 
-The canonical package is at `thonnycontrib/autopairs.py`. The files under the platform folders are legacy convenience distributions and remain available for manual installation.
-
-## Package Installation
-
-Install the package through Thonny's package manager or pip:
+Install from Thonny's package manager or with pip:
 
 ```shell
 pip install thonny-autopairs
 ```
 
-After installation, restart Thonny. The package provides the `thonnycontrib.autopairs` plugin and automatically discovers `load_plugin()`.
+Restart Thonny after installation.
 
-## Windows Installation
+### Windows installer
 
-1. Download `thonny-autopairs-setup.exe` from [Releases](https://github.com/Yuvald12321/thonny-autopairs/releases/latest) and double-click it.
-   Because the program is unsigned, Windows protected your PC might appear. Click More info > Run anyway.
-2. When you see the installation complete message, close and reopen Thonny.
+Download `thonny-autopairs-setup.exe` from the [latest GitHub release](https://github.com/Yuvald12321/thonny-autopairs/releases/latest).
 
-If the installer cannot find the Thonny installation folder, it asks you to enter the Thonny folder path. To find it, right-click the Thonny shortcut and select Open file location.
+1. Double-click the installer.
+2. If Windows SmartScreen appears, select **More info > Run anyway**.
+3. Close and reopen Thonny after installation completes.
 
-If the EXE cannot run in your environment, open `thonny-autopairs-windows/install_helper.py` in Thonny and press Run (F5). Otherwise, use manual installation.
+The installer is unsigned. If it cannot run or cannot find Thonny, open `thonny-autopairs-windows/install_helper.py` in Thonny and press **Run (F5)**.
 
-## macOS Installation
+### macOS installer
 
-1. Double-click `install.command` in the `thonny-plugins/` folder. If it is blocked, right-click and select Open, or run `bash install.command` in Terminal.
-2. Restart Thonny.
+1. Open `thonny-plugins/install.command`.
+2. Double-click it in Finder, or run:
 
-## Manual Installation
+   ```shell
+   bash install.command
+   ```
 
-- Windows: In Thonny, select Tools > Open Thonny data folder..., then copy `autopairs.py` into `plugins\Python3XX\site-packages\thonnycontrib\`. `Python3XX` is the Python version bundled with Thonny (for example, `Python313`).
-- macOS: Copy `autopairs.py` into `~/Library/Thonny/plugins/lib/python/site-packages/thonnycontrib/`.
+3. Restart Thonny.
+
+### Manual installation
+
+Copy `thonnycontrib/autopairs.py` into the `thonnycontrib` directory inside Thonny's plugin folder.
+
+**Windows**
+
+In Thonny, open **Tools > Open Thonny data folder...**, then copy the file to:
+
+```text
+plugins\Python3XX\site-packages\thonnycontrib\
+```
+
+Replace `Python3XX` with the Python version bundled with Thonny, such as `Python313`.
+
+**macOS**
+
+Copy the file to:
+
+```text
+~/Library/Thonny/plugins/lib/python/site-packages/thonnycontrib/
+```
+
+## Configuration
+
+Open **Tools > Options > Auto-pairs** to configure:
+
+- Auto-close brackets
+- Auto-close quotes
+- Enable or disable auto-pairs in the Thonny Shell
 
 ## Uninstallation
 
-Delete `autopairs.py` from the installed `thonnycontrib` folder, then restart Thonny.
+Remove `autopairs.py` from Thonny's `thonnycontrib` plugin directory, then restart Thonny.
+
+For a pip installation, remove the package with:
+
+```shell
+pip uninstall thonny-autopairs
+```
+
+## Development
+
+Clone the repository and build the distributions locally:
+
+```shell
+python -m pip install --upgrade build twine
+python -m build
+python -m twine check dist/*
+```
+
+The package entry point is `thonnycontrib/autopairs.py`. It exports `load_plugin()`, which Thonny discovers when the plugin package is installed.
+
+## Publishing
+
+The `.github/workflows/publish-pypi.yml` workflow builds the source distribution and wheel, then publishes to PyPI using GitHub Trusted Publishing.
+
+Publishing runs after a GitHub release is published or when the workflow is started manually.
+
+The PyPI Trusted Publisher must match:
+
+- Owner: `Yuvald12321`
+- Repository: `thonny-autopairs`
+- Workflow: `publish-pypi.yml`
+- Environment: `pypi`
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the [MIT License](LICENSE).

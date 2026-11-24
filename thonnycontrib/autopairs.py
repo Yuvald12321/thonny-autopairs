@@ -32,7 +32,7 @@ PAIRS = {**BRACKETS, '"': '"', "'": "'"}
 # a pair is added only when the char right of the cursor is one of these
 PAIR_BEFORE = {"", "\n", " ", "\t", ")", "]", "}", ",", ":", ";"}
 
-STRING_PREFIX_REGEX = re.compile(r"(?:^|[^\w])([rRbBuUfFtT]{1,2})$")
+STRING_PREFIX_REGEX = re.compile(r"(?:^|\W)([rRbBuUfFtT]{1,2})$")
 VALID_STRING_PREFIXES = {
     "r", "u", "b", "f", "t", "br", "rb", "fr", "rf", "tr", "rt",
 }

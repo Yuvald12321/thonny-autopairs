@@ -1,23 +1,23 @@
-Thonny 괄호/따옴표 자동완성 플러그인 (Windows, Thonny 5)
+Thonny Bracket and Quote Auto-pairing Plugin (Windows, Thonny 5)
 
-기능
-- 괄호 ( [ { 와 따옴표 " ' 자동 닫기, 닫는 문자 건너뛰기, 빈 쌍 Backspace로 같이 지우기
-- 괄호 안에서 Enter 치면 닫는 괄호를 다음 줄로
-- 선택한 글자를 괄호/따옴표로 감싸기, """ 세 개 입력 시 """|"""
-- 끄고 켜기: Tools > Options > Auto-pairs
+Features
+- Automatically close brackets ( [ { and quotes " ', skip closing characters, and delete empty pairs with Backspace
+- Press Enter inside brackets to move the closing bracket to the next line
+- Wrap selected text with brackets or quotes; typing """ three times creates """|"""
+- Enable or disable under Tools > Options > Auto-pairs
 
-설치
-1. https://github.com/syalim0503/thonny/releases/latest 에서 thonny-autopairs-setup.exe 를 받아 더블클릭
-   ("Windows의 PC 보호" 창이 뜨면: 추가 정보 > 실행)
-2. "설치 완료" 메시지가 나오면 Thonny를 껐다가 다시 열기
+Installation
+1. Download thonny-autopairs-setup.exe from https://github.com/Yuvald12321/thonny-autopairs/releases/latest and double-click it
+   (if Windows protected your PC appears: click More info > Run anyway)
+2. When you see "Installation complete," close and reopen Thonny
 
-exe가 막히면
-  install_helper.py 를 Thonny에서 열고 Run(F5)을 누릅니다.
+If the EXE is blocked
+  Open install_helper.py in Thonny and press Run (F5).
 
-수동 설치
-  1. Thonny에서 Tools > Open Thonny data folder... 를 누르면 Thonny 폴더가 열립니다.
-  2. 그 안의 plugins\Python3XX\site-packages\thonnycontrib\ 에 autopairs.py 를 복사
-     (폴더가 없으면 만들기. Python3XX는 Thonny에 들어 있는 Python 버전, 예: Python313)
+Manual Installation
+  1. In Thonny, select Tools > Open Thonny data folder... to open the Thonny folder.
+  2. Copy autopairs.py into plugins\Python3XX\site-packages\thonnycontrib\
+     (create the folder if necessary. Python3XX is the Python version bundled with Thonny, for example Python313)
 
-삭제
-  위 thonnycontrib 폴더에서 autopairs.py 를 지우고 Thonny 재시작
+Uninstallation
+  Delete autopairs.py from the thonnycontrib folder above and restart Thonny

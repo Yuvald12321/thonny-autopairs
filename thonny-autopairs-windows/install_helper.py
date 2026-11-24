@@ -21,6 +21,8 @@ QUERY = (
 
 def source_file():
     base = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
+    if not os.path.isfile(os.path.join(base, "thonnycontrib", "autopairs.py")):
+        base = os.path.dirname(base)
     return os.path.join(base, "thonnycontrib", "autopairs.py")
 
 
@@ -33,13 +35,13 @@ def find_thonny_python():
             if os.path.isfile(candidate):
                 return candidate
 
-    print("Thonny 설치 폴더를 찾지 못했습니다.")
-    print("Thonny 폴더 경로를 붙여넣고 Enter를 누르세요.")
-    print("  (Thonny 바로가기 우클릭 > 파일 위치 열기로 찾을 수 있습니다)")
-    entered = input("경로: ").strip().strip('"')
+    print("Could not find the Thonny installation folder.")
+    print("Paste the Thonny folder path and press Enter.")
+    print("  (Find it by right-clicking the Thonny shortcut and selecting Open file location)")
+    entered = input("Path: ").strip().strip('"')
     candidate = entered if os.path.isfile(entered) else os.path.join(entered, "python.exe")
     if not entered or not os.path.isfile(candidate):
-        raise SystemExit("그 폴더에서 python.exe를 찾지 못했습니다. 설치를 취소합니다.")
+        raise SystemExit("python.exe was not found in that folder. Installation cancelled.")
     return candidate
 
 
@@ -47,14 +49,13 @@ def plugins_dir():
     if not FROZEN:
         try:
             import thonny
-
             return thonny.get_sys_path_directory_containg_plugins()
         except ImportError:
             pass
 
     result = subprocess.run([find_thonny_python(), "-I", "-c", QUERY], capture_output=True)
     if result.returncode != 0 or not result.stdout:
-        raise SystemExit("Thonny에서 플러그인 폴더를 알아내지 못했습니다.\n"
+        raise SystemExit("Could not determine Thonny's plugin folder.\n"
                          + result.stderr.decode("utf-8", "replace"))
     return result.stdout.decode("utf-8")
 
@@ -63,8 +64,8 @@ def main():
     target_dir = os.path.join(plugins_dir(), "thonnycontrib")
     os.makedirs(target_dir, exist_ok=True)
     shutil.copy2(source_file(), target_dir)
-    print("설치 완료:", os.path.join(target_dir, "autopairs.py"))
-    print("Thonny를 껐다가 다시 열면 적용됩니다.")
+    print("Installation complete:", os.path.join(target_dir, "autopairs.py"))
+    print("Close and reopen Thonny to activate the plugin.")
 
 
 if __name__ == "__main__":
@@ -76,14 +77,14 @@ if __name__ == "__main__":
         main()
     except SystemExit as e:
         if e.code not in (None, 0):
-            print(e.code if isinstance(e.code, str) else "설치에 실패했습니다.")
+            print(e.code if isinstance(e.code, str) else "Installation failed.")
             code = 1
     except Exception as e:
-        print("설치에 실패했습니다:", e)
+        print("Installation failed:", e)
         code = 1
     if FROZEN:
         try:
-            input("\nEnter를 누르면 창이 닫힙니다.")
+            input("\nPress Enter to close the window.")
         except EOFError:
             pass
     sys.exit(code)

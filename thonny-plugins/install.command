@@ -1,10 +1,10 @@
 #!/bin/bash
-# Thonny 플러그인 설치: 괄호/따옴표 자동완성(autopairs)
-# Finder에서 더블클릭하거나, 터미널에서 `bash install.command`로 실행하세요.
+# Install the Thonny plugin: bracket/quote auto-pairing (autopairs)
+# Double-click in Finder or run `bash install.command` in Terminal.
 
 cd "$(dirname "$0")" || exit 1
 
-# Thonny.app 찾기
+# Find Thonny.app
 THONNY_APP=""
 for candidate in "/Applications/Thonny.app" "$HOME/Applications/Thonny.app"; do
     if [ -d "$candidate" ]; then
@@ -16,7 +16,7 @@ if [ -z "$THONNY_APP" ]; then
     THONNY_APP="$(mdfind "kMDItemCFBundleIdentifier == 'org.thonny.Thonny'" 2>/dev/null | head -n 1)"
 fi
 
-# Thonny가 쓰는 플러그인 폴더를 Thonny 자신에게 물어보기
+# Ask Thonny for the plugin folder it uses
 DEST=""
 THONNY_PY="$THONNY_APP/Contents/Frameworks/Python.framework/Versions/Current/bin/python3"
 if [ -n "$THONNY_APP" ] && [ -x "$THONNY_PY" ]; then
@@ -24,16 +24,16 @@ if [ -n "$THONNY_APP" ] && [ -x "$THONNY_PY" ]; then
 fi
 if [ -z "$DEST" ]; then
     DEST="$HOME/Library/Thonny/plugins/lib/python/site-packages"
-    echo "Thonny.app을 찾지 못해 기본 위치에 설치합니다."
+    echo "Thonny.app was not found; installing in the default location."
 fi
 
 mkdir -p "$DEST/thonnycontrib" || exit 1
-cp thonnycontrib/autopairs.py "$DEST/thonnycontrib/" || exit 1
+cp ../thonnycontrib/autopairs.py "$DEST/thonnycontrib/" || exit 1
 
 echo ""
-echo "설치 완료: $DEST/thonnycontrib"
+echo "Installation complete: $DEST/thonnycontrib"
 if pgrep -f "Thonny.app/Contents/Resources/thonnymain.py" > /dev/null; then
-    echo "Thonny가 실행 중입니다. 종료(Cmd+Q) 후 다시 열면 적용됩니다."
+    echo "Thonny is running. Quit it with Cmd+Q, then reopen it to activate the plugin."
 else
-    echo "Thonny를 열면 바로 적용됩니다."
+    echo "Open Thonny to activate the plugin."
 fi

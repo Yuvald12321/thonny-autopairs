@@ -1,18 +1,18 @@
-Thonny 편의기능 플러그인 (Thonny 5, macOS)
+Thonny Convenience Plugin (Thonny 5, macOS)
 
-기능
-- 괄호 ( [ { 와 따옴표 " ' 자동 닫기, 닫는 문자 건너뛰기, 빈 쌍 Backspace로 같이 지우기
-- 괄호 안에서 Enter 치면 닫는 괄호를 다음 줄로
-- 선택한 글자를 괄호/따옴표로 감싸기, """ 세 개 입력 시 """|"""
-- 끄고 켜기: Tools > Options > Auto-pairs
+Features
+- Automatically close brackets ( [ { and quotes " ', skip closing characters, and delete empty pairs with Backspace
+- Press Enter inside brackets to move the closing bracket to the next line
+- Wrap selected text with brackets or quotes; typing """ three times creates """|"""
+- Enable or disable under Tools > Options > Auto-pairs
 
-설치
-1. install.command 를 더블클릭 (막히면: 우클릭 > 열기, 또는 터미널에서 bash install.command)
-2. Thonny 재시작
+Installation
+1. Double-click install.command (if blocked: right-click > Open, or run bash install.command in Terminal)
+2. Restart Thonny
 
-수동 설치
-  thonnycontrib 폴더 안의 autopairs.py 를 아래 폴더에 복사 (폴더가 없으면 만들기)
+Manual Installation
+  Copy autopairs.py from the thonnycontrib folder to the folder below (create it if necessary)
   ~/Library/Thonny/plugins/lib/python/site-packages/thonnycontrib/
 
-삭제
-  위 폴더에서 autopairs.py 를 지우고 Thonny 재시작
+Uninstallation
+  Delete autopairs.py from the folder above and restart Thonny

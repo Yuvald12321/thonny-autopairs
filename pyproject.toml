@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "thonny-autopairs"
-version = "1.0.0"
+version = "1.0.1"
 description = "Bracket and quote auto-pairing plugin for Thonny"
 readme = "README.md"
 requires-python = ">=3.9"

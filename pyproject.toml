@@ -8,6 +8,9 @@ version = "1.0.0"
 description = "Bracket and quote auto-pairing plugin for Thonny"
 readme = "README.md"
 requires-python = ">=3.9"
+dependencies = [
+    "thonny>=5",
+]
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [

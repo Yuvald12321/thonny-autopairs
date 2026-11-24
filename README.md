@@ -26,7 +26,7 @@ The canonical package is at `thonnycontrib/autopairs.py`. The files under the pl
 Install the package through Thonny's package manager or pip:
 
 ```shell
-pip install .
+pip install thonny-autopairs
 ```
 
 After installation, restart Thonny. The package provides the `thonnycontrib.autopairs` plugin and automatically discovers `load_plugin()`.
